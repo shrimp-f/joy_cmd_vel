@@ -1,0 +1,26 @@
+<launch>
+
+ <!-- Turtlesim Node-->
+  <node pkg="turtlesim" type="turtlesim_node" name="sim"/>
+
+
+ <!-- joy node -->
+  <node respawn="true" pkg="joy"
+        type="joy_node" name="turtle_joy" >
+    <param name="dev" type="string" value="/dev/input/js0" />
+    <param name="deadzone" value="0.12" />
+
+    <!-- Rate in Hz at which a joy stick that has a non-changing state will resend the priviously sent message.joyはボタンが切り替わった時にしかトピックを拾わないため． -->
+    <param name="autorepeat_rate" value="10" />
+  </node>
+
+ <!-- Axes -->
+  <param name="axis_linear" value="1" type="int"/>
+  <param name="axis_angular" value="0" type="int"/>
+  <param name="scale_linear" value="2" type="double"/>
+  <param name="scale_angular" value="2" type="double"/>
+
+  <node pkg="learning_joy" type="turtle_teleop_joy" name="teleop"/>
+
+</launch>
+
